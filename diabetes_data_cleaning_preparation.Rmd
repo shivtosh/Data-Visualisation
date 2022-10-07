@@ -1,0 +1,114 @@
+
+```{r}
+data<-read.csv("/Users/shivangidubey/Documents/tableau_files/data_sources/diabetes_binary_health_indicators_BRFSS2015.csv")
+str(data)
+names(data)
+colSums(is.na(data))
+```
+
+```{r}
+names_binary<-c('Diabetes_binary','HighBP','HighChol','CholCheck','Smoker','Stroke','HeartDiseaseorAttack','Fruits','Veggies','HvyAlcoholConsump','AnyHealthcare','NoDocbcCost','DiffWalk','Sex','Education','Income','Age')
+for (i in seq(1:length(names_binary))){
+  x<-names_binary[i]
+  data[,x]<-as.factor(data[,x])
+}
+str(data)
+```
+
+```{r}
+
+data$Income<-factor(data$Income,levels<-c(1,2,3,4,5,6,7,8),labels=c('<10,000$','<15,000$','20,000$','<25,000$','>35,000$','<50,000$','<75,000$','>75,000$'))
+unique(data$Income)
+
+data$Education<-factor(data$Education,levels<-c(1,2,3,4,5,6),labels=c('Did not graduate High School','Graduated High School','Attended College or Technical School','Graduated From College or Technical School','Attempted Higher Studies after College','Completed Higher Studies after College'))
+unique(data$Education)
+
+data$Age<-factor(data$Age,levels<-c(1,2,3,4,5,6,7,8,9,10,11,12,13),labels=c('18y to 24y','25y-29y','30y-34y','35y-39y','40y-44y','45y-49y','50y-54y','55y-59y','60y-64y','65y-69y','70y-74y','75y-79y','80y or older'))
+unique(data$Age)
+
+data$GenHlth<-factor(data$GenHlth,levels<-c(1,2,3,4,5),labels=c('Excellent','Very Good','Good','Fair','Poor'))
+unique(data$GenHlth)
+
+data$Diabetes_binary<-factor(data$Diabetes_binary,levels<-c(0,1),labels=c("No","Yes"))
+data$HighBP<-factor(data$HighBP,levels<-c(0,1),labels=c("No","Yes"))
+data$HighChol<-factor(data$HighChol,levels<-c(0,1),labels=c("No","Yes"))
+data$CholCheck<-factor(data$CholCheck,levels<-c(0,1),labels=c("No","Yes"))
+data$Smoker<-factor(data$Smoker,levels<-c(0,1),labels=c("No","Yes"))
+data$Stroke<-factor(data$Stroke,levels<-c(0,1),labels=c("No","Yes"))
+data$HeartDiseaseorAttack<-factor(data$HeartDiseaseorAttack,levels<-c(0,1),labels=c("No","Yes"))
+data$Fruits<-factor(data$Fruits,levels<-c(0,1),labels=c("No","Yes"))
+data$Veggies<-factor(data$Veggies,levels<-c(0,1),labels=c("No","Yes"))
+data$HvyAlcoholConsump<-factor(data$HvyAlcoholConsump,levels<-c(0,1),labels=c("No","Yes"))
+data$AnyHealthcare<-factor(data$AnyHealthcare,levels<-c(0,1),labels=c("No","Yes"))
+data$NoDocbcCost<-factor(data$NoDocbcCost,levels<-c(0,1),labels=c("No","Yes"))
+data$Sex<-factor(data$Sex,levels<-c(0,1),labels=c("F","M"))
+```
+```{r}
+colnames(data)<-c("Diabetes_binary","HighBP","HighChol","CholCheck","BMI" ,"Smoker","Stroke","HeartDiseaseorAttack","Days of PhysActivity","Fruits","Veggies","HvyAlcoholConsump","AnyHealthCare","NoDocbcCost","GenHeath","Days of Bad Mental Health","Days of Bad Phys Health","Difficulty in Walking","Sex","Age","Education","Income Intervals")
+str(data)
+```
+
+```{r}
+unique(data$Diabetes_binary)
+```
+
+
+```{r}
+unique(data$Education)
+```
+```{r}
+table(data$Age,data$Diabetes_binary)
+```
+
+```{r}
+write.csv(data,"/Users/shivangidubey/Documents/tableau_files/data_sources/diabetes.csv")
+```
+```{r}
+summary(data$Age)
+```
+
+```{r}
+diabetes<-read.csv("/Users/shivangidubey/Documents/tableau_files/data_sources/diabetes.csv")
+```
+```{r}
+str(diabetes)
+```
+```{r}
+#age_index
+unique(diabetes$Age)
+```
+```{r}
+library(dplyr)
+diabetes_up_1<-diabetes %>% mutate(Age_mean=ifelse(Age=="18y to 24y",Age_mean<-(18+24)/2,ifelse(Age=="25y-29y",Age_mean<-(25+29)/2,ifelse(Age=="30y-34y",Age_mean<-(30+34)/2,ifelse(Age=="35y-39y",Age_mean<-(35+39)/2,ifelse(Age=="40y-44y",Age_mean<-(40+44)/2,ifelse(Age=="45y-49y",Age_mean<-(40+44)/2,ifelse(Age=="45y-49y",Age_mean<-(45+49)/2,ifelse(Age=="50y-54y",Age_mean<-(50+54)/2,ifelse(Age=="55y-59y",Age_mean<-(55+59)/2,ifelse(Age=="60y-64y",Age_mean<-(60+64)/2,ifelse(Age=="65y-69y",Age_mean<-(65+69)/2,ifelse(Age=="70y-74y",Age_mean<-(70+74/2),ifelse(Age=="80y or older",Age_mean<-(80+100)/2,0))))))))))))))
+
+str(diabetes_up_1)
+```
+```{r}
+
+unique(diabetes$Income.Intervals)
+diabetes_up_1<-diabetes_up_1 %>% mutate(Income_mean=ifelse(Income.Intervals=="<10,000$",Income_mean<-5000,ifelse(Income.Intervals=="<15,000$",Income_mean<-12500,ifelse(Income.Intervals=="<20,000$",Income_mean<-17500,ifelse(Income.Intervals=="<25,000$",Income_mean<-22500,ifelse(Income.Intervals=="<35,000$",Income_mean<-30000,ifelse(Income.Intervals=="<50,000$",Income_mean<-42500,ifelse(Income.Intervals=="<75,000$",Income_mean<-62500,ifelse(Income.Intervals==">75,000$",Income_mean<-87500,0)))))))))
+unique(diabetes$Income.Intervals)
+str(diabetes_up_1)
+```
+```{r}
+unique(diabetes$Education)
+diabetes_up_1<-diabetes_up_1 %>% mutate(Edu_mean=ifelse(Education=="Graduated From College or Technical School",Edu_mean<-19,ifelse(Education=="Attended College or Technical School",Edu_mean<-17,ifelse(Education=="Graduated High School",Edu_mean<-16,ifelse(Education=="Completed Higher Studies after College",Edu_mean<-21,ifelse(Education=="Attempted Higher Studies after College",Edu_mean<-20,ifelse(Education=="Did not graduate High School",Edu_mean<-12,0)))))))
+
+str(diabetes_up_1)
+```
+```{r}
+diabetes_up_1<-diabetes_up_1 %>% mutate(Age_index<-(Age_mean-0)/100)
+diabetes_up_1<-diabetes_up_1 %>% mutate(Edu_index<-(Edu_mean-0)/21)
+diabetes_up_1<-diabetes_up_1 %>% mutate(Inc_index<-(Income_mean-0)/100000)
+
+str(diabetes_up_1)
+```
+```{r}
+diabetes_up_1<-diabetes_up_1 %>% mutate(HDI=(diabetes_up_1$Age_index*diabetes_up_1$Edu_index*diabetes_up_1$Inc_index)^(1/3))
+str(diabetes_up_1)
+```
+```{r}
+write.csv(diabetes_up_1,"/Users/shivangidubey/Documents/tableau_files/data_sources/diabetes_final_upd.csv")
+```
+
+
