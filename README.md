@@ -3,3 +3,4 @@
 \> file_for_tableau.csv represents dataset cleaned and ready for tableau.<br />
 \> The final .twbx file is visualisation made with tableau. It also includes the dashboard prepared using the sheets in tableau.<br />
 \> The report guiding with the steps of the project and insights captured is uploaded in pdf format.<br />
+\> Dashboard: https://public.tableau.com/views/2039934_CS5803/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link
