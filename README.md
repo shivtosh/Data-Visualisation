@@ -4,12 +4,17 @@
 > The final .twbx file is visualisation made with tableau. It also includes the dashboard prepared using the sheets in tableau.<br />
 > The report guiding with the steps of the project and insights captured is uploaded in pdf format.<br />
 
-> QUESTIONS
-> - Is there a correlation between self-care habits , or lifestyle factors with the diagnosis of
+### > QUESTIONS
+## > - Is there a correlation between self-care habits , or lifestyle factors with the diagnosis of
 diabetes in a patient.
-> - Is HDI something that can be correlated with diabetes diagnosis of a patient.
+## > - Is HDI something that can be correlated with diabetes diagnosis of a patient.
 
-> Dashboard: https://public.tableau.com/views/2039934_CS5803/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link
+## > Dashboard: https://public.tableau.com/views/2039934_CS5803/Dashboard1?:language=en-GB&:display_count=n&:origin=viz_share_link
+## > A snapshot of the Dashboard
+
+![Dashboard Page 1](https://github.com/shivtosh/Diabetes-Lifestyle-and-Tableau/blob/main/Tableau%20Dashboard_page-0001.jpg?raw=true)
+
+
 
 > INSIGHTS
 
